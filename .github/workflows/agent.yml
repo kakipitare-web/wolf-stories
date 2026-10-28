@@ -1,26 +1,33 @@
 name: wolf-agent
+# ריצה אחת נשארת דלוקה עד ~5.5 שעות ובודקת כל 4 דקות, ובסוף מפעילה את עצמה מחדש.
+# ה-cron הוא רק גיבוי (התזמון של GitHub מתעכב לפעמים בשעות).
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    - cron: "7 */2 * * *"
   workflow_dispatch:
     inputs:
       dry:
         description: "ריצת ניסיון בלי פרסום"
         type: boolean
         default: false
+      loop:
+        description: "כמה דקות להישאר דלוק (0 = ריצה אחת)"
+        default: "330"
 concurrency:
   group: wolf-agent
   cancel-in-progress: false
 permissions:
   contents: write
+  actions: write
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 350
     env:
       TZ: Asia/Jerusalem
       IG_TOKEN: ${{ secrets.IG_TOKEN }}
       IG_USER_ID: ${{ secrets.IG_USER_ID }}
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -30,10 +37,17 @@ jobs:
       - run: |
           git config user.name "wolf-agent"
           git config user.email "wolf-agent@users.noreply.github.com"
-      - name: agent
-        run: python agent.py ${{ inputs.dry && '--dry-run' || '' }}
-      - name: save state
-        if: always()
+      - name: agent loop
         run: |
-          git add state.json teams_he.json 2>/dev/null || true
-          git diff --cached --quiet || (git commit -qm "state" && git pull -q --rebase && git push -q)
+          END=$(( $(date +%s) + 60 * ${{ inputs.loop || '330' }} ))
+          while true; do
+            git pull -q --rebase --autostash || true
+            python agent.py ${{ inputs.dry && '--dry-run' || '' }} || true
+            git add state.json teams_he.json 2>/dev/null || true
+            git diff --cached --quiet || (git commit -qm "state" && git pull -q --rebase && git push -q) || true
+            [ $(date +%s) -ge $END ] && break
+            sleep 240
+          done
+      - name: next shift
+        if: ${{ !inputs.dry && (inputs.loop || '330') != '0' }}
+        run: gh workflow run wolf-agent -R ${{ github.repository }} -f loop=330
