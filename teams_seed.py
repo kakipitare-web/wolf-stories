@@ -13,6 +13,14 @@ HE = {
 # הולנד/פורטוגל/אחר
 "Ajax":"אייאקס","PSV Eindhoven":"פ.ס.וו איינדהובן","PSV":"פ.ס.וו","Feyenoord":"פיינורד","AZ Alkmaar":"אלקמאר","Twente":"טוונטה","FC Utrecht":"אוטרכט","Den Bosch":"דן בוש","Sparta Rotterdam":"ספרטה רוטרדם","Fortuna Sittard":"פורטונה סיטארד",
 "Benfica":"בנפיקה","Porto":"פורטו","FC Porto":"פורטו","Sporting CP":"ספורטינג ליסבון","Braga":"בראגה","Celtic":"סלטיק","Rangers":"ריינג'רס","Galatasaray":"גלטסראיי","Fenerbahce":"פנרבחצ'ה","Fenerbahçe":"פנרבחצ'ה","Besiktas":"בשיקטאש","Beşiktaş":"בשיקטאש","Club Brugge":"קלאב ברוז'","Olympiakos":"אולימפיאקוס","PAOK":"פאוק","Red Bull Salzburg":"זלצבורג","Shakhtar Donetsk":"שחטאר","Dinamo Zagreb":"דינמו זאגרב","Slavia Prague":"סלביה פראג","Copenhagen":"קופנהגן","Bodø/Glimt":"בודו גלימט",
+# יוון/דנמרק/סקנדינביה/מרכז אירופה
+"PAOK Thessaloniki":"פאוק","AEK Athens":"אא\"ק אתונה","Olympiacos":"אולימפיאקוס","Panathinaikos":"פנאתינייקוס","Aris Thessaloniki":"אריס סלוניקי",
+"Esbjerg fB":"אסביירג","Nordsjælland":"נורשיילנד","FC Copenhagen":"קופנהגן","FC Midtjylland":"מידטיילנד","Midtjylland":"מידטיילנד","Brøndby IF":"ברונדבי","Brøndby":"ברונדבי","AGF":"אורהוס","AC Horsens":"הורסנס",
+"Malmö FF":"מאלמו","AIK":"AIK","Djurgården":"יורגורדן","Molde":"מולדה","Rosenborg":"רוזנבורג","Bodø/Glimt":"בודו גלימט",
+"Slovan Bratislava":"סלובן ברטיסלבה","Sparta Praha":"ספרטה פראג","Slavia Praha":"סלביה פראג","Viktoria Plzen":"ויקטוריה פלזן","Ferencváros":"פרנצווארוש","Legia Warszawa":"לגיה ורשה","Lech Poznan":"לך פוזנן",
+"Red Star Belgrade":"הכוכב האדום","Crvena Zvezda":"הכוכב האדום","Partizan":"פרטיזן","Young Boys":"יאנג בויז","Basel":"באזל","FC Basel":"באזל","Sturm Graz":"שטורם גראץ","Rapid Wien":"ראפיד וינה",
+"Anderlecht":"אנדרלכט","Genk":"גנק","Union St.Gilloise":"יוניון סן ז'יל","Gent":"גנט","Standard Liège":"סטנדרד ליאז'",
+"Al Hilal":"אל הילאל","Al Nassr":"אל נאסר","Al Ittihad":"אל איתיחאד",
 # ישראל
 "Maccabi Tel Aviv":"מכבי תל אביב","Hapoel Beer Sheva":"הפועל באר שבע","Hapoel Be'er Sheva":"הפועל באר שבע","Maccabi Haifa":"מכבי חיפה","Beitar Jerusalem":"בית\"ר ירושלים","Hapoel Tel Aviv":"הפועל תל אביב","Hapoel Haifa":"הפועל חיפה","Hapoel Jerusalem":"הפועל ירושלים","Maccabi Netanya":"מכבי נתניה","Bnei Sakhnin":"בני סכנין","Hapoel Petah Tikva":"הפועל פתח תקווה","Maccabi Bnei Raina":"מכבי בני ריינה","Ironi Kiryat Shmona":"עירוני קריית שמונה","Ashdod":"מ.ס אשדוד","FC Ashdod":"מ.ס אשדוד","Ironi Tiberias":"עירוני טבריה","Hapoel Hadera":"הפועל חדרה","Maccabi Petah Tikva":"מכבי פתח תקווה",
 }
