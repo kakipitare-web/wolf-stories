@@ -119,7 +119,10 @@ def todays_matches():
     out = []
     for lg in d.get("leagues", []):
         pid = lg.get("primaryId")
-        tier = TIER.get(pid, 1 if any(k in (lg.get("name") or "").lower() for k in INTL) else None)
+        lname = (lg.get("name") or "").lower()
+        if any(k in lname for k in ("women", "(w)", "u19", "u17", "youth")):
+            continue  # בלי נשים ונוער (חוץ מאליפות אירופה עד גיל 21)
+        tier = TIER.get(pid, 1 if any(k in lname for k in INTL) else None)
         if tier is None:
             continue
         for m in lg.get("matches", []):
