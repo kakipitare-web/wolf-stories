@@ -83,7 +83,7 @@ def match_data(mid):
     utc = g.get("matchTimeUTCDate") or h.get("status", {}).get("utcTime")
     il = time.localtime(calendar.timegm(time.strptime(utc[:16], "%Y-%m-%dT%H:%M")))  # TZ=Asia/Jerusalem
     stats = {}
-    for grp in (c.get("stats") or {}).get("Periods", {}).get("All", {}).get("stats", []):
+    for grp in ((((c.get("stats") or {}).get("Periods") or {}).get("All") or {}).get("stats") or []):
         for s in grp.get("stats", []):
             if s.get("key") and s.get("stats") and None not in s["stats"]:
                 stats.setdefault(s["key"], s["stats"])
