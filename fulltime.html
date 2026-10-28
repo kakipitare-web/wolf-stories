@@ -1,0 +1,86 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#F3AB3D;--cream:#F4F1EA;--bg:#0B0E13;--card:#16181d}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Heebo;color:var(--cream)}
+.glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 24% at 50% 24%,rgba(243,171,61,.18),rgba(0,0,0,0) 70%)}
+.top{position:absolute;top:215px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center}
+.tag{display:flex;align-items:center;gap:16px;font-weight:900;font-size:64px;letter-spacing:-1.5px}
+.eyes{display:inline-flex;gap:10px;margin-inline-start:6px}
+.eyes i{width:24px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(243,171,61,.9)}
+.meta{font-weight:700;font-size:28px;color:var(--gold);background:rgba(243,171,61,.12);border:1.5px solid rgba(243,171,61,.45);padding:8px 22px 10px;border-radius:999px}
+/* score */
+.sc{position:absolute;top:330px;left:60px;right:60px;display:grid;grid-template-columns:1fr auto 1fr;align-items:start;gap:10px}
+.tm{text-align:center}
+.tm img{width:150px;height:150px;object-fit:contain;filter:drop-shadow(0 10px 18px rgba(0,0,0,.7))}
+.tm .nm{margin-top:10px;font-weight:900;font-size:44px;line-height:1.05}
+.tm .gl{margin-top:12px;font-weight:600;font-size:25px;line-height:1.5;color:rgba(244,241,234,.75);direction:ltr}
+.tm .gl b{color:var(--gold);font-weight:800}
+.big{direction:ltr;font-weight:900;font-size:168px;line-height:1;letter-spacing:-4px;color:var(--gold);text-shadow:0 0 60px rgba(243,171,61,.3);padding-top:6px;white-space:nowrap}
+.big span{color:rgba(244,241,234,.35);margin:0 14px}
+/* momentum */
+.box{position:absolute;left:60px;right:60px;background:var(--card);border:1.5px solid #23262d;border-radius:24px;padding:22px 28px}
+.box h3{font-weight:900;font-size:32px;margin-bottom:14px;display:flex;justify-content:space-between;align-items:baseline}
+.box h3 small{font-weight:600;font-size:22px;color:rgba(244,241,234,.45)}
+#mom{position:relative;height:170px;direction:ltr}
+#mom .mid{position:absolute;left:0;right:0;top:50%;height:2px;background:rgba(244,241,234,.18)}
+#mom .b{position:absolute;width:7px;border-radius:3px}
+#mom .ht{position:absolute;top:0;bottom:0;width:2px;background:rgba(243,171,61,.5)}
+#mom .lbl{position:absolute;bottom:-4px;font-size:18px;color:rgba(244,241,234,.4);font-weight:700}
+/* stats */
+.st{display:flex;flex-direction:column;gap:10px}
+.row .vals{display:flex;justify-content:space-between;align-items:baseline;font-weight:900;font-size:34px;direction:ltr}
+.row .vals .t{font-weight:700;font-size:26px;color:rgba(244,241,234,.7)}
+.bar{margin-top:6px;display:flex;gap:6px;height:12px;direction:ltr}
+.bar i{display:block;border-radius:6px;height:100%}
+.hi{color:var(--gold)}
+/* potm */
+.potm{display:flex;align-items:center;gap:26px}
+.potm .ph{width:108px;height:108px;border-radius:50%;padding:5px;background:var(--gold);flex:none}
+.potm .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 15%;background:#2a2d34}
+.potm .k{font-weight:700;font-size:24px;color:var(--gold)}
+.potm .n{font-weight:900;font-size:50px;line-height:1.05;direction:ltr;text-align:right}
+.potm .r{margin-inline-start:auto;font-weight:900;font-size:46px;color:#0B0E13;background:#2BD46B;border-radius:16px;padding:6px 18px 10px}
+.foot{position:absolute;bottom:70px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:24px;color:rgba(244,241,234,.5)}
+.foot b{color:var(--cream);font-weight:800}
+.foot .me{display:flex;align-items:center;gap:12px}
+.foot .me img{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold)}
+</style></head><body>
+<div class="glow"></div>
+<div class="top"><div class="tag">סיום<span class="eyes"><i></i><i></i></span></div><div class="meta" id="meta"></div></div>
+<div class="sc" id="sc"></div>
+<div class="box" style="top:790px"><h3>מומנטום המשחק <small id="momk"></small></h3><div id="mom"><div class="mid"></div></div></div>
+<div class="box" style="top:1066px"><h3>הנתונים</h3><div class="st" id="st"></div></div>
+<div class="box" id="pbox" style="top:1572px;padding:14px 28px"><div class="potm" id="potm"></div></div>
+<div class="foot"><span class="me"><img src="wolf.jpg"><b>@tip4winner</b></span><span>ההמלצות בקבוצה החינמית · קישור בביו</span></div>
+<script>
+const D=/*DATA*/null;
+const [H,A]=D.teams;
+document.getElementById('meta').innerHTML=`<bdi>${D.league}</bdi> · <bdi>${D.time}</bdi>`;
+const gl=i=>D.goals[i].map(g=>`${g.n} <b>${g.t}'</b>`).join('<br>');
+document.getElementById('sc').innerHTML=
+ `<div class="tm"><img src="${H.logo}"><div class="nm">${H.name}</div><div class="gl">${gl(0)}</div></div>`+
+ `<div class="big">${H.score}<span>:</span>${A.score}</div>`+
+ `<div class="tm"><img src="${A.logo}"><div class="nm">${A.name}</div><div class="gl">${gl(1)}</div></div>`;
+// big score is LTR: home on the left of the number but home crest is on the right (RTL) → swap number order to match crests
+document.querySelector('.big').innerHTML=`${A.score}<span>:</span>${H.score}`;
+// momentum (positive = home)
+const M=D.momentum||[], box=document.getElementById('mom'), W=box.clientWidth||960, n=Math.max(M.length,1);
+document.getElementById('momk').innerHTML=`<span style="color:${H.color}">■</span> ${H.name} &nbsp; <span style="color:${A.color}">■</span> ${A.name}`;
+M.forEach((v,i)=>{const b=document.createElement('i');b.className='b';const h=Math.abs(v)/100*80;
+  // home on the right side visually: draw time right→left so it reads RTL
+  b.style.left=(W-(i+1)*(W/n))+'px';b.style.width=Math.max(3,W/n-2)+'px';b.style.height=h+'px';
+  b.style.top=v>0?(85-h)+'px':'85px';b.style.background=v>0?H.color:A.color;box.appendChild(b)});
+[45].forEach(m=>{const l=document.createElement('i');l.className='ht';l.style.left=(W-(m/ (n-1||90))*W)+'px';box.appendChild(l)});
+// stats
+const S=D.stats, want=[['BallPossesion','החזקת כדור','%'],['expected_goals','שערים צפויים (xG)',''],['total_shots','בעיטות',''],['ShotsOnTarget','למסגרת',''],['big_chance','מצבים גדולים','']];
+document.getElementById('st').innerHTML=want.filter(w=>S[w[0]]).map(([k,t,u])=>{const [h,a]=S[k].map(x=>parseFloat(x));const tot=(h+a)||1;
+  return `<div class="row"><div class="vals"><span class="${a>h?'hi':''}">${S[k][1]}${u}</span><span class="t">${t}</span><span class="${h>a?'hi':''}">${S[k][0]}${u}</span></div>
+  <div class="bar"><i style="width:${a/tot*100}%;background:${a>=h?'var(--gold)':'#3a3d45'}"></i><i style="width:${h/tot*100}%;background:${h>=a?'var(--gold)':'#3a3d45'}"></i></div></div>`}).join('');
+// potm
+if(D.potm){document.getElementById('potm').innerHTML=`<div class="ph"><img src="https://images.fotmob.com/image_resources/playerimages/${D.potm.pid}.png"></div>
+ <div><div class="k">שחקן המשחק · ${D.teams[D.potm.side].name}</div><div class="n">${D.potm.n}</div></div><div class="r">${D.potm.r}</div>`}
+else document.getElementById('pbox').remove();
+</script>
+</body></html>

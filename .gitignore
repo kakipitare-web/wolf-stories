@@ -1,0 +1,6 @@
+__pycache__/
+.lock
+*.png
+wolf-stories/*/page.html
+wolf-stories/*/wolf.jpg
+.DS_Store

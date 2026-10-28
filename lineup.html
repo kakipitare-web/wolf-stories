@@ -1,0 +1,103 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#F3AB3D;--cream:#F4F1EA;--bg:#0B0E13;--card:#16181d}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Heebo;color:var(--cream)}
+.glow{position:absolute;inset:0;background:
+  radial-gradient(ellipse 60% 22% at 50% 30%,rgba(243,171,61,.20),rgba(0,0,0,0) 70%),
+  radial-gradient(ellipse 90% 40% at 50% 100%,rgba(243,171,61,.07),rgba(0,0,0,0) 70%)}
+/* header */
+.top{position:absolute;top:215px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center}
+.tag{display:flex;align-items:center;gap:16px;font-weight:900;font-size:64px;letter-spacing:-1.5px}
+.tag .ok{width:20px;height:20px;border-radius:50%;background:#2BD46B;box-shadow:0 0 0 8px rgba(43,212,107,.18)}
+.eyes{display:inline-flex;gap:10px;margin-inline-start:6px}
+.eyes i{width:24px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(243,171,61,.9)}
+.meta{font-weight:700;font-size:28px;color:var(--gold);background:rgba(243,171,61,.12);border:1.5px solid rgba(243,171,61,.45);padding:8px 22px 10px;border-radius:999px}
+.vs{position:absolute;top:322px;left:60px;right:60px;height:150px;display:flex;align-items:center;justify-content:space-between}
+.tm{display:flex;align-items:center;gap:22px;width:420px}
+.tm.away{flex-direction:row-reverse;text-align:left}
+.tm img{width:108px;height:108px;object-fit:contain;filter:drop-shadow(0 8px 16px rgba(0,0,0,.7))}
+.tm .nm{font-weight:900;font-size:46px;line-height:1.02}
+.tm .fm{margin-top:6px;font-weight:800;font-size:28px;color:var(--gold);direction:ltr;unicode-bidi:isolate}
+.tm.away .fm{text-align:left}
+.mid{font-weight:800;font-size:30px;color:rgba(244,241,234,.4)}
+/* 3D pitch */
+.stage{position:absolute;left:0;right:0;top:452px;height:1090px;perspective:2400px;perspective-origin:50% 100%;overflow:hidden;direction:ltr}
+.plane{position:absolute;left:50px;top:-40px;width:980px;height:1120px;transform-style:preserve-3d;transform-origin:50% 100%;
+  transform:rotateX(13deg)}
+.turf{position:absolute;inset:0;border-radius:26px;overflow:hidden;
+  background:repeating-linear-gradient(180deg,#171b22 0 126px,#13161c 126px 252px);
+  border:3px solid rgba(243,171,61,.55);box-shadow:0 0 80px rgba(243,171,61,.15),0 60px 120px rgba(0,0,0,.8)}
+.turf svg{position:absolute;inset:0}
+.pl{position:absolute;transform-style:preserve-3d}
+.pl .up{position:absolute;left:0;top:0;transform-origin:50% 100%;transform:translate(-50%,-100%) rotateX(-13deg);
+  display:flex;flex-direction:column;align-items:center;width:200px}
+.pl.far .up{transform:translate(-50%,-100%) rotateX(-13deg) scale(.84)}
+.pl .sh{position:absolute;left:0;top:0;width:96px;height:30px;transform:translate(-50%,-50%);border-radius:50%;
+  background:radial-gradient(closest-side,rgba(0,0,0,.75),rgba(0,0,0,0))}
+.ph{position:relative;width:74px;height:74px;border-radius:50%;padding:4px;background:var(--ring);box-shadow:0 10px 22px rgba(0,0,0,.6)}
+.ph img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 15%;background:#2a2d34}
+.ph .ini{display:flex;width:100%;height:100%;border-radius:50%;background:#1d2027;align-items:center;justify-content:center;font-weight:900;font-size:26px;color:var(--cream);direction:ltr}
+.ph .num{position:absolute;bottom:-6px;left:-8px;min-width:34px;height:34px;padding:0 6px;border-radius:20px;background:#0B0E13;border:2.5px solid var(--ring);
+  color:#fff;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center}
+.nmp{margin-top:3px;font-weight:800;font-size:21px;line-height:1;direction:ltr;white-space:nowrap;background:rgba(11,14,19,.82);
+  border:1.5px solid rgba(243,171,61,.35);padding:5px 12px 7px;border-radius:10px;text-shadow:0 2px 4px rgba(0,0,0,.6)}
+/* out */
+.out{position:absolute;top:1560px;left:60px;right:60px;display:flex;gap:24px}
+.out .col{flex:1;background:var(--card);border:1.5px solid #23262d;border-radius:20px;padding:14px 22px 16px}
+.out h4{font-weight:900;font-size:27px;color:var(--gold);margin-bottom:6px}
+.out p{font-weight:500;font-size:24px;line-height:1.35;color:rgba(244,241,234,.85)}
+.out p i{font-style:normal;color:rgba(244,241,234,.45);font-size:20px}
+.foot{position:absolute;bottom:70px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:24px;color:rgba(244,241,234,.5)}
+.foot b{color:var(--cream);font-weight:800}
+.foot .me{display:flex;align-items:center;gap:12px}
+.foot .me img{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold)}
+</style></head><body>
+<div class="glow"></div>
+<div class="top"><div class="tag"><span class="ok"></span>ההרכבים<span class="eyes"><i></i><i></i></span></div><div class="meta" id="meta"></div></div>
+<div class="vs" id="vs"></div>
+<div class="stage"><div class="plane" id="plane"><div class="turf">
+<svg viewBox="0 0 980 1120" preserveAspectRatio="none" fill="none" stroke="rgba(243,171,61,.42)" stroke-width="4">
+  <rect x="24" y="24" width="932" height="1072" rx="8"/><line x1="24" y1="560" x2="956" y2="560"/><circle cx="490" cy="560" r="100"/>
+  <circle cx="490" cy="560" r="6" fill="rgba(243,171,61,.6)"/>
+  <rect x="250" y="24" width="480" height="170"/><rect x="375" y="24" width="230" height="64"/>
+  <rect x="250" y="926" width="480" height="170"/><rect x="375" y="1032" width="230" height="64"/>
+</svg></div></div></div>
+<div class="out" id="out"></div>
+<div class="foot"><span class="me"><img src="wolf.jpg"><b>@tip4winner</b></span><span>ההמלצות בקבוצה החינמית · קישור בביו</span></div>
+<script>
+const D=/*DATA*/null;
+const [H,A]=D.teams;
+document.getElementById('meta').innerHTML=`<bdi>${D.league}</bdi> · <bdi>${D.time}</bdi>`;
+const tm=(t,cls)=>`<div class="tm ${cls}"><img src="${t.logo}"><div><div class="nm">${t.name}</div><div class="fm">${t.formation||''}</div></div></div>`;
+document.getElementById('vs').innerHTML=tm(H,'home')+'<div class="mid">נגד</div>'+tm(A,'away');
+const P=document.getElementById('plane');
+const W=980,HH=1120,half=HH/2;
+function rows(list,formation){
+  // השורות נבנות מהמערך הרשמי (למשל 5-4-1 → 1,5,4,1): השחקנים לפי קוד העמדה, וכל שורה משמאל לימין
+  const counts=[1,...String(formation||'').split('-').map(Number).filter(n=>n>0)];
+  const ok=counts.reduce((a,b)=>a+b,0)===list.length;
+  const sorted=[...list].sort((a,b)=>ok?(a.pos-b.pos)||(a.y-b.y):(a.y-b.y));
+  let lines=[];
+  if(ok){let i=0;counts.forEach(c=>{lines.push(sorted.slice(i,i+c));i+=c})}
+  else{const ys=[...new Set(sorted.map(p=>p.y.toFixed(2)))];lines=ys.map(y=>sorted.filter(p=>p.y.toFixed(2)===y))}
+  const n=lines.length;
+  lines.forEach((line,i)=>{line.sort((a,b)=>a.x-b.x);const k=line.length;
+    line.forEach((p,j)=>{p.ry=0.05+i*(0.80/(n-1||1));p.rx=k===1?0.5:0.5+(j-(k-1)/2)*Math.min(0.2,0.84/(k-1))})});
+  return list;
+}
+function put(t,home){
+  rows(t.starters,t.formation).forEach(p=>{
+    const x=home? p.rx : 1-p.rx;
+    const y=home? HH-28-(p.ry/0.85*(half-105)) : 58+(p.ry/0.85*(half-112));
+    const el=document.createElement('div');el.className=home?'pl':'pl far';el.style.left=(x*W)+'px';el.style.top=y+'px';
+    el.innerHTML=`<div class="sh"></div><div class="up"><div class="ph" style="--ring:${t.color}"><img src="https://images.fotmob.com/image_resources/playerimages/${p.pid}.png" onerror="this.outerHTML=\`<span class=ini>${p.n.replace(/[^A-Za-zÀ-ž]/g,'').slice(0,2).toUpperCase()}</span>\`"><span class="num">${p.num}</span></div><div class="nmp">${p.n}</div></div>`;
+    P.appendChild(el);
+  });
+}
+put(A,false);put(H,true);
+const col=t=>`<div class="col"><h4>חסרים · ${t.name}</h4><p>${t.out.length? t.out.slice(0,2).map(o=>`<bdi>${o.n}</bdi> <i>(${o.why})</i>`).join('<br>') : 'סגל מלא'}${t.out.length>2?` <i>+${t.out.length-2}</i>`:''}</p></div>`;
+document.getElementById('out').innerHTML=col(H)+col(A);
+</script>
+</body></html>

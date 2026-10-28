@@ -1,0 +1,33 @@
+<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--gold:#F3AB3D;--cream:#F4F1EA;--bg:#0B0E13}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);font-family:Heebo;color:var(--cream)}
+.bg{position:absolute;inset:-60px;background-size:cover;background-position:center;filter:blur(40px) brightness(.35)}
+.glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 30% at 50% 22%,rgba(243,171,61,.18),rgba(0,0,0,0) 70%)}
+.top{position:absolute;top:215px;left:60px;right:60px;display:flex;justify-content:space-between;align-items:center}
+.tag{display:flex;align-items:center;gap:16px;font-weight:900;font-size:60px;letter-spacing:-1.5px}
+.eyes{display:inline-flex;gap:10px}
+.eyes i{width:24px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 14px rgba(243,171,61,.9)}
+.card{position:absolute;left:105px;top:330px;width:870px;height:1087px;border-radius:30px;overflow:hidden;
+  box-shadow:0 40px 90px rgba(0,0,0,.8),0 0 0 3px rgba(243,171,61,.55);transform:rotate(-2deg)}
+.card img{width:100%;height:100%;object-fit:cover}
+.cta{position:absolute;top:1490px;left:0;right:0;text-align:center}
+.cta .a{font-weight:900;font-size:58px;letter-spacing:-1px}
+.cta .a b{color:var(--gold)}
+.cta .b{margin-top:10px;font-weight:600;font-size:30px;color:rgba(244,241,234,.7)}
+.foot{position:absolute;bottom:70px;left:60px;right:60px;display:flex;justify-content:center;align-items:center;gap:12px;font-weight:800;font-size:26px}
+.foot img{width:48px;height:48px;border-radius:50%;border:2px solid var(--gold)}
+</style></head><body>
+<div class="bg" id="bg"></div><div class="glow"></div>
+<div class="top"><div class="tag">ניתוח חדש<span class="eyes"><i></i><i></i></span></div></div>
+<div class="card"><img id="im"></div>
+<div class="cta"><div class="a">כל הנתונים <b>בפוסט האחרון</b> ↑</div><div class="b" id="b"></div></div>
+<div class="foot"><img src="wolf.jpg">@tip4winner</div>
+<script>
+const D=/*DATA*/null;
+document.getElementById('im').src=D.img; document.getElementById('bg').style.backgroundImage=`url(${D.img})`;
+document.getElementById('b').textContent=D.sub||'';
+</script>
+</body></html>
