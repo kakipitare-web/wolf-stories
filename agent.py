@@ -136,9 +136,10 @@ def gal_carousels(st):
     for m in data:
         if m["id"] in st["seen_media"]:
             continue
-        st["seen_media"].append(m["id"])
         if m["media_type"] == "CAROUSEL_ALBUM" and utc_ts(m["timestamp"][:19], "%Y-%m-%dT%H:%M:%S") > st["since"]:
-            new.append(m)
+            new.append(m)  # מסומן כ"נראה" רק אחרי שהסטורי עלה — אם נכשל, ינסה שוב בריצה הבאה
+        else:
+            st["seen_media"].append(m["id"])
     return new
 
 
@@ -176,6 +177,7 @@ def main():
             if can("gal"):
                 log("ניתוח חדש של גל →", m["id"])
                 publish_story(gal_story(m))
+                st["seen_media"].append(m["id"])
                 mark(f"gal_{m['id']}", "gal")
     except Exception:
         log("שגיאה בקרוסלות:", traceback.format_exc()[-500:])
