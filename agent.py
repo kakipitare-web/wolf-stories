@@ -11,13 +11,14 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 import lineups as L
+from teams_seed import HE
 
 STATE = HERE / "state.json"
 DRY = "--dry-run" in sys.argv
 REPO = os.environ.get("GITHUB_REPOSITORY", "kakipitare-web/wolf-stories")
 RAW = f"https://raw.githubusercontent.com/{REPO}/main/"
 API = "https://graph.instagram.com/v23.0/"
-MAX_PER_DAY = {"lineup": 14, "fulltime": 14, "gal": 6}
+MAX_PER_DAY = {"lineup": 20, "fulltime": 20, "gal": 6}
 
 # הליגות של הזאב (רשימת המועדפים של דניאל ב-Flashscore, 28.10) + הגביעים של כל מדינה. מזהי FotMob.
 # 0 = ישראל · 1 = אירופה + 5 הגדולות וגביעיהן · 2 = כל השאר. כשיש הרבה משחקים, התקרה היומית נתפסת לפי הסדר הזה.
@@ -32,6 +33,7 @@ TIER = {
     136: 2, 330: 2, 248: 2, 226: 2, 228: 2, 223: 2, 9011: 2, 224: 2, 113: 2, 9471: 2, 59: 2, 206: 2,
 }
 INTL = ("euro", "nations league", "libertadores")  # תחרויות נבחרות/יבשתיות לפי שם
+CUP_WORDS = ("cup", "pokal", "beker", "coppa", "copa", "coupe", "taça", "kupa", "cupen", "pokalen", "puchar", "cupa", "kupasi")
 
 
 def log(*a):
@@ -125,7 +127,10 @@ def todays_matches():
         tier = TIER.get(pid, 1 if any(k in lname for k in INTL) else None)
         if tier is None:
             continue
+        is_cup = any(k in lname for k in CUP_WORDS)
         for m in lg.get("matches", []):
+            if is_cup and m["home"]["name"] not in HE and m["away"]["name"] not in HE:
+                continue  # בגביעים — רק משחקים עם קבוצה מוכרת (לא קבוצות חובבים מליגות נמוכות)
             out.append(dict(id=str(m["id"]), ko=utc_ts(m["status"]["utcTime"][:16], "%Y-%m-%dT%H:%M"),
                             name=f'{m["home"]["name"]} - {m["away"]["name"]}', finished=m["status"].get("finished"),
                             cancelled=m["status"].get("cancelled"), prio=tier))
