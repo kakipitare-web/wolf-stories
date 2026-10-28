@@ -68,7 +68,7 @@ def host(jpg):
     rel = jpg.relative_to(HERE).as_posix()
     git("add", "-f", rel)
     git("commit", "-qm", f"story {rel}")
-    git("pull", "-q", "--rebase")
+    git("pull", "-q", "--rebase", "--autostash")
     git("push", "-q")
     url = RAW + urllib.parse.quote(rel)
     for _ in range(20):
