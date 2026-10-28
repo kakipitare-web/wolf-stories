@@ -67,7 +67,8 @@ def host(jpg):
     """מעלה את התמונה לריפו הציבורי ומחזיר כתובת שאינסטגרם יכול למשוך."""
     rel = jpg.relative_to(HERE).as_posix()
     git("add", "-f", rel)
-    git("commit", "-qm", f"story {rel}")
+    if subprocess.run(["git", "-C", str(HERE), "diff", "--cached", "--quiet"]).returncode:
+        git("commit", "-qm", f"story {rel}")
     git("pull", "-q", "--rebase", "--autostash")
     git("push", "-q")
     url = RAW + urllib.parse.quote(rel)
@@ -85,14 +86,27 @@ def publish_story(folder):
         log("  [dry-run] היה עולה:", folder.name)
         return
     _, uid = secrets()
-    cid = ig(f"{uid}/media", {"image_url": host(folder / "story.jpg"), "media_type": "STORIES"}, post=True)["id"]
-    for _ in range(40):
-        if ig(cid, {"fields": "status_code"}).get("status_code") in ("FINISHED", None):
-            break
-        time.sleep(3)
-    sid = ig(f"{uid}/media_publish", {"creation_id": cid}, post=True)["id"]
-    log("  ✅ עלה סטורי", sid)
-    time.sleep(60)  # רווח בין העלאות — לא להיראות כמו ספאם
+    url = host(folder / "story.jpg")
+    for attempt in range(3):
+        cid = ig(f"{uid}/media", {"image_url": url, "media_type": "STORIES"}, post=True)["id"]
+        status = None
+        for _ in range(40):
+            status = ig(cid, {"fields": "status_code"}).get("status_code")
+            if status in ("FINISHED", "ERROR", "EXPIRED"):
+                break
+            time.sleep(4)
+        if status == "FINISHED":
+            try:
+                sid = ig(f"{uid}/media_publish", {"creation_id": cid}, post=True)["id"]
+                log("  ✅ עלה סטורי", sid)
+                time.sleep(60)  # רווח בין העלאות — לא להיראות כמו ספאם
+                return
+            except RuntimeError as e:
+                log("  ניסיון", attempt + 1, "נכשל:", str(e)[:160])
+        else:
+            log("  ניסיון", attempt + 1, "— אינסטגרם לא קלט את התמונה:", status)
+        time.sleep(20)
+    raise RuntimeError("publish failed after 3 attempts")
 
 
 def utc_ts(s, fmt):
