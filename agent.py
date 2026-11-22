@@ -18,7 +18,7 @@ DRY = "--dry-run" in sys.argv
 REPO = os.environ.get("GITHUB_REPOSITORY", "kakipitare-web/wolf-stories")
 RAW = f"https://raw.githubusercontent.com/{REPO}/main/"
 API = "https://graph.instagram.com/v23.0/"
-MAX_PER_DAY = {"lineup": 6, "fulltime": 6, "gal": 6}
+MAX_PER_DAY = {"lineup": 0, "fulltime": 0, "gal": 6}  # 22.11.26: הרכבים ותוצאות מושהים לבקשת דניאל. להחזרה: 6, 6
 
 # הליגות של הזאב (רשימת המועדפים של דניאל ב-Flashscore, 28.10) + הגביעים של כל מדינה. מזהי FotMob.
 # 0 = ישראל · 1 = אירופה + 5 הגדולות וגביעיהן · 2 = כל השאר. כשיש הרבה משחקים, התקרה היומית נתפסת לפי הסדר הזה.
